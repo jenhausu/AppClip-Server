@@ -2,6 +2,7 @@ import Fluent
 import FluentPostgresDriver
 import Leaf
 import Vapor
+import NIOSSL
 
 // configures your application
 public func configure(_ app: Application) throws {
@@ -19,9 +20,34 @@ public func configure(_ app: Application) throws {
     app.migrations.add(CreateTodo())
 
     app.views.use(.leaf)
-
     
+    setHTTP2Config(app)
 
     // register routes
     try routes(app)
+}
+
+private func setHTTP2Config(_ app: Application) {
+    let homePath = app.directory.workingDirectory
+    let certPath = homePath + "cert.pem"
+    let keyPath = homePath + "key.pem"
+    
+    do {
+        let certs = try NIOSSLCertificate.fromPEMFile(certPath).map { NIOSSLCertificateSource.certificate($0) }
+        let tls = TLSConfiguration.forServer(certificateChain: certs, privateKey: .file(keyPath))
+        app.http.server.configuration = .init(hostname: "127.0.0.1",
+                                              port: 8080,
+                                              backlog: 256,
+                                              reuseAddress: true,
+                                              tcpNoDelay: true,
+                                              responseCompression: .disabled,
+                                              requestDecompression: .disabled,
+                                              supportPipelining: false,
+                                              supportVersions: Set<HTTPVersionMajor>([.two]),
+                                              tlsConfiguration: tls,
+                                              serverName: nil,
+                                              logger: nil)
+    } catch {
+        print(error)
+    }
 }
