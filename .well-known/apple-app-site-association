@@ -1,5 +1,14 @@
 {
 	"appclips": {
 		"apps": [ "SUV34UZRXX.com.osensetech.businesscard.clip"  ]
+	},
+	"applinks": {
+		"apps": [],
+		"details": [
+			{
+				"appID": "SUV34UZRXX.com.osensetech.businesscard",
+				"components": []
+			}
+		]
 	}
 }
