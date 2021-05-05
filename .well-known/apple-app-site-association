@@ -7,7 +7,11 @@
 		"details": [
 			{
 				"appID": "SUV34UZRXX.com.osensetech.businesscard",
-				"components": []
+				"components": [
+					{
+						"/": "*"
+					}
+				]
 			}
 		]
 	}
