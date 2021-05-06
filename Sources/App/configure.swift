@@ -6,8 +6,8 @@ import NIOSSL
 
 // configures your application
 public func configure(_ app: Application) throws {
-    app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
     app.middleware.use(UniversalLinksMiddleware())
+    app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
 
     app.databases.use(.postgres(
         hostname: Environment.get("DATABASE_HOST") ?? "localhost",

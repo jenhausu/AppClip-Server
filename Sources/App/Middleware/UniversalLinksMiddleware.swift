@@ -8,7 +8,7 @@
 import Vapor
 
 struct UniversalLinksMiddleware: Middleware {
-        
+    
     func respond(to request: Request, chainingTo next: Responder) -> EventLoopFuture<Response> {
         next.respond(to: request).map { response in
             response.headers.add(name: "content-type", value: "application/json")
