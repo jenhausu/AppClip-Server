@@ -9,7 +9,6 @@
 				"appID": "SUV34UZRXX.com.osensetech.businesscard",
 				"components": [
 					{
-						"/": "/getContact/*",
 						"?": { "id": "*" }
 					}
 				]
