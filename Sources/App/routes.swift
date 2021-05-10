@@ -10,13 +10,13 @@ func routes(_ app: Application) throws {
         "Hello, world!"
     }
     
-    app.get("getContact") { request -> Contact in
+    app.post("contact") { request -> Contact in
         let value = try request.content.decode(ContactRequest.self)
         let id = value.id
         let contact = fetchContact(id: id)
         
         return contact
     }
-
+    
     try app.register(collection: TodoController())
 }
