@@ -29,7 +29,7 @@ struct ContactRequest: Content {
 
 func fetchContact(id: Int) -> Contact {
     if id == 1 {
-        return Contact(id: id, name: "蘇健豪", phoneNumber: "0970595053", companyName: "光禾")
+        return Contact(id: id, name: "Nolan", phoneNumber: "0960777777", companyName: "光禾")
     } else if id == 2 {
         return Contact(id: id, name: "Claire", phoneNumber: "0912333444", companyName: "光禾")
     } else if id == 3 {
