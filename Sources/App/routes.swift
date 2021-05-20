@@ -10,6 +10,14 @@ func routes(_ app: Application) throws {
         "Hello, world!"
     }
     
+    app.post("") { request -> Contact in
+        let value = try request.content.decode(ContactRequest.self)
+        let id = value.id
+        let contact = fetchContact(id: id)
+        
+        return contact
+    }
+    
     app.post("contact") { request -> Contact in
         let value = try request.content.decode(ContactRequest.self)
         let id = value.id
