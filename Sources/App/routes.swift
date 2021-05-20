@@ -11,19 +11,11 @@ func routes(_ app: Application) throws {
     }
     
     app.post("") { request -> Contact in
-        let value = try request.content.decode(ContactRequest.self)
-        let id = value.id
-        let contact = fetchContact(id: id)
-        
-        return contact
+        try makeContact(with: request)
     }
     
     app.post("contact") { request -> Contact in
-        let value = try request.content.decode(ContactRequest.self)
-        let id = value.id
-        let contact = fetchContact(id: id)
-        
-        return contact
+        try makeContact(with: request)
     }
     
     try app.register(collection: TodoController())

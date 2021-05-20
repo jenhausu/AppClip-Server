@@ -38,3 +38,11 @@ func fetchContact(id: Int) -> Contact {
         return Contact(id: 0, name: "", phoneNumber: "", companyName: "")
     }
 }
+
+func makeContact(with request: Request) throws -> Contact {
+    let value = try request.content.decode(ContactRequest.self)
+    let id = value.id
+    let contact = fetchContact(id: id)
+    
+    return contact
+}
